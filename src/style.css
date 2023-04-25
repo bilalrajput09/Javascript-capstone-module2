@@ -209,7 +209,7 @@ textarea {
   position: relative;
   text-align: center;
   padding: 20px 25px;
-  background: #161b22;
+  background: rgb(7, 7, 43);
   border-top: 1px solid #333;
   color: white;
 }
