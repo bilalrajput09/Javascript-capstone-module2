@@ -5,14 +5,15 @@
 }
 
 body {
-  background-color: rgb(217, 232, 245);
-  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  background-color: rgb(243, 239, 239);
+  font-family: 'Comic Neue', cursive;
 }
 
 nav {
   background-color: rgb(7, 7, 43);
   display: flex;
   justify-content: space-between;
+  padding: 0 1em;
 }
 
 .nav-logo {
@@ -21,6 +22,14 @@ nav {
   height: 4rem;
   margin-left: 1.5rem;
   background-size: cover;
+}
+
+.header_logo_container {
+  display: flex;
+  color: white;
+  font-weight: 700;
+  font-size: 25px;
+  align-items: center;
 }
 
 nav li {
@@ -44,18 +53,25 @@ a {
   justify-content: center;
 }
 
+.nav_items_links:hover {
+  color: rgb(9, 236, 66);
+}
+
 .main_items_container {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-rows: 1fr 1fr 1fr;
   width: 90%;
   margin: 3em auto;
-  gap: 10px;
+  gap: 20px;
+  max-width: 800px;
 }
 
 .item_contianer {
   width: 100%;
   margin-bottom: 1em;
+  display: flex;
+  flex-direction: column;
 }
 
 .item_contianer img {
@@ -69,18 +85,40 @@ a {
   margin-bottom: 1em;
   font-size: 20px;
   font-weight: 700;
+  width: 70%;
+  align-self: center;
 }
 
 .popup_btn {
-  width: 100%;
+  width: 70%;
+  margin: 0.2em auto;
   padding: 0.1em 0;
   font-size: 20px;
-  background-color: white;
   font-weight: 700;
+  background-color: rgb(7, 7, 43);
+  color: white;
+  font-family: 'Comic Neue', cursive;
+}
+
+.popup_btn:hover {
+  background-color: rgb(8, 192, 54);
 }
 
 .fa-heart {
   color: rgb(226, 206, 206);
+}
+
+section {
+  width: 70%;
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  margin: 0 auto;
+  padding: 3em;
+  padding-top: 4em;
+  font-size: 20px;
+  font-family: 'Comic Neue', cursive;
+  line-height: 35px;
 }
 
 /* Popup styling starts here */
@@ -96,7 +134,7 @@ a {
 }
 
 .popup_container {
-  background-color: rgb(187, 187, 223);
+  background-color: rgb(243, 239, 239);
   width: 70%;
   display: flex;
   gap: 30px;
@@ -174,6 +212,12 @@ textarea {
   padding: 0.2em 0;
   width: 20%;
   margin-bottom: 1em;
+  background-color: rgb(7, 7, 43);
+  color: white;
+}
+
+.form_submit_btn:hover {
+  background-color: rgb(8, 192, 54);
 }
 
 .hidden {
@@ -215,5 +259,5 @@ textarea {
 }
 
 .footer a {
-  color: brown;
+  color: rgb(9, 236, 66);
 }
