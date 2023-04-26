@@ -116,71 +116,6 @@ const createPopupWindow = async (filteredObj, i) => {
   });
 };
 
-const createCards = async () => {
-  try {
-    let html = '';
-
-    const items = await getData();
-    const { categories } = items;
-
-    const likeID = await getLikes(projectID);
-
-    categories.forEach((category) => {
-      html += `<div id = ${category.idCategory} class="item_contianer">
-                <img src="${category.strCategoryThumb}" alt="">
-                <div class="name_like_conatiner">
-                    <p>${category.strCategory}</p> 
-                    
-                    <div class="likes_heart"> 
-                    <p>${likesShow(likeID, category) ? likesShow(likeID, category) : '0'}</p>
-                    <i class="fas fa-heart"></i>
-                    </div>
-                </div>
-                <button class="comments popup_btn">Comments</button>
-                <button class="reservation popup_btn">Reservation</button>
-            </div>`;
-    });
-
-    mainItemsContainer.insertAdjacentHTML('afterbegin', html);
-
-    comments = document.querySelectorAll('.comments');
-    reservation = document.querySelectorAll('.reservation');
-    const heartBtn = document.querySelectorAll('.fa-heart');
-
-    comments.forEach((comment, i) => {
-      comment.addEventListener('click', (e) => {
-        const { id } = e.target.closest('.item_contianer');
-
-        const [filteredObj] = categories.filter((category) => category.idCategory === id);
-        createPopupWindow(filteredObj, i + 1);
-      });
-    });
-
-    reservation.forEach((reserve, i) => {
-      reserve.addEventListener('click', (e) => {
-        const { id } = e.target.closest('.item_contianer');
-        const [filteredObj] = categories.filter((category) => category.idCategory === id);
-        createPopupWindowReservation(filteredObj, i + 1);
-      });
-    });
-
-    heartBtn.forEach((heart) => {
-      heart.addEventListener('click', (e) => {
-        const { id } = e.target.closest('.item_contianer');
-        heart.classList.add('colour_red');
-        let likeCounter = e.target.previousElementSibling.textContent;
-        likeCounter = +likeCounter;
-        likeCounter += 1;
-        e.target.previousElementSibling.textContent = String(likeCounter);
-        postLikes(id, projectID);
-      });
-    });
-    return 'Passed';
-  } catch (err) {
-    return 'something went wrong';
-  }
-};
-
 const createPopupWindowReservation = async (filteredObj, i) => {
   const data = await showReservation(i, projectID);
   commentHtml = reservationShow(data);
@@ -254,4 +189,69 @@ const createPopupWindowReservation = async (filteredObj, i) => {
     });
   });
 };
+const createCards = async () => {
+  try {
+    let html = '';
+
+    const items = await getData();
+    const { categories } = items;
+
+    const likeID = await getLikes(projectID);
+
+    categories.forEach((category) => {
+      html += `<div id = ${category.idCategory} class="item_contianer">
+                <img src="${category.strCategoryThumb}" alt="">
+                <div class="name_like_conatiner">
+                    <p>${category.strCategory}</p> 
+                    
+                    <div class="likes_heart"> 
+                    <p>${likesShow(likeID, category) ? likesShow(likeID, category) : '0'}</p>
+                    <i class="fas fa-heart"></i>
+                    </div>
+                </div>
+                <button class="comments popup_btn">Comments</button>
+                <button class="reservation popup_btn">Reservation</button>
+            </div>`;
+    });
+
+    mainItemsContainer.insertAdjacentHTML('afterbegin', html);
+
+    comments = document.querySelectorAll('.comments');
+    reservation = document.querySelectorAll('.reservation');
+    const heartBtn = document.querySelectorAll('.fa-heart');
+
+    comments.forEach((comment, i) => {
+      comment.addEventListener('click', (e) => {
+        const { id } = e.target.closest('.item_contianer');
+
+        const [filteredObj] = categories.filter((category) => category.idCategory === id);
+        createPopupWindow(filteredObj, i + 1);
+      });
+    });
+
+    reservation.forEach((reserve, i) => {
+      reserve.addEventListener('click', (e) => {
+        const { id } = e.target.closest('.item_contianer');
+        const [filteredObj] = categories.filter((category) => category.idCategory === id);
+        createPopupWindowReservation(filteredObj, i + 1);
+      });
+    });
+
+    heartBtn.forEach((heart) => {
+      heart.addEventListener('click', (e) => {
+        const { id } = e.target.closest('.item_contianer');
+        heart.classList.add('colour_red');
+        let likeCounter = e.target.previousElementSibling.textContent;
+        likeCounter = +likeCounter;
+        likeCounter += 1;
+        e.target.previousElementSibling.textContent = String(likeCounter);
+        postLikes(id, projectID);
+      });
+    });
+    return 'Passed';
+  } catch (err) {
+    return 'something went wrong';
+  }
+};
+
 createCards();
