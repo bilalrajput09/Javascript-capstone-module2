@@ -14,9 +14,7 @@ let reservation;
 const backdrop = document.querySelector('.backdrop');
 const projectID = 'jz9Xjlf6GBUQcvBtrKpI';
 const dateTime = new Date();
-const navContainer = document.querySelector(".nav_container");
-console.log(navContainer);
-
+const navContainer = document.querySelector('.nav_container');
 
 const closePopup = () => {
   backdrop.innerHTML = '';
@@ -210,8 +208,8 @@ const createCards = async () => {
     const items = await getData();
     const { categories } = items;
 
-    let itemsCounter = categories.length;
-    let itemCounterHtml = `<li class="nav_items"><a class="nav_items_links" href="#"> (${itemsCounter}) Categories</a></li><li class="nav_items"><a class="nav_items_links" href="#">Ingredients</a></li><li class="nav_items"><a class="nav_items_links" href="#">Meal Area</a></li>`
+    const itemsCounter = categories.length;
+    const itemCounterHtml = `<li class="nav_items"><a class="nav_items_links" href="#"> (${itemsCounter}) Categories</a></li><li class="nav_items"><a class="nav_items_links" href="#">Ingredients</a></li><li class="nav_items"><a class="nav_items_links" href="#">Meal Area</a></li>`;
 
     navContainer.innerHTML = itemCounterHtml;
 
@@ -263,20 +261,14 @@ const createCards = async () => {
 
         let likeCounter = e.target.previousElementSibling.textContent;
         likeCounter = +likeCounter;
-        if (heart.classList.contains("colour_red")) {
-
+        if (heart.classList.contains('colour_red')) {
           likeCounter += 1;
           e.target.previousElementSibling.textContent = String(likeCounter);
           postLikes(id, projectID);
-        }
-        else {
-
+        } else {
           likeCounter -= 1;
           e.target.previousElementSibling.textContent = String(likeCounter);
         }
-
-
-
       });
     });
     return 'Passed';
