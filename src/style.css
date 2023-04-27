@@ -106,6 +106,7 @@ a {
 
 .fa-heart {
   color: rgb(226, 206, 206);
+  cursor: pointer;
 }
 
 section {

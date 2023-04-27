@@ -7,7 +7,6 @@ import postLikes from './modules/postLikes.js';
 import showReservation from './modules/showReservation.js';
 import createReservation from './modules/createReservation.js';
 import showComments from './modules/showComments.js';
-import reservationShow from './modules/reservationShow.js';
 
 const mainItemsContainer = document.querySelector('.main_items_container');
 let comments;
@@ -15,6 +14,7 @@ let reservation;
 const backdrop = document.querySelector('.backdrop');
 const projectID = 'jz9Xjlf6GBUQcvBtrKpI';
 const dateTime = new Date();
+const navContainer = document.querySelector('.nav_container');
 
 const closePopup = () => {
   backdrop.innerHTML = '';
@@ -22,12 +22,26 @@ const closePopup = () => {
 };
 
 let commentHtml = '';
+let commentsCounter = 0;
+let reservationCounter = 0;
 
 const commentsShow = (data) => {
   commentHtml = '';
+  commentsCounter = 0;
   if (!data) return;
   data.forEach((d) => {
     commentHtml += `<p>${d.creation_date} ${d.username}: ${d.comment}</p>`;
+    commentsCounter += 1;
+  });
+};
+
+const reservationShow = (data) => {
+  commentHtml = '';
+  reservationCounter = 0;
+  if (!data) return;
+  data.forEach((d) => {
+    commentHtml += `<p>${d.date_start} - ${d.date_end} by ${d.username}</p>`;
+    reservationCounter += 1;
   });
 };
 
@@ -53,9 +67,7 @@ const createPopupWindow = async (filteredObj, i) => {
 
                     <div class="comments_conatiner">
 
-                        <div class="comments_text">Comments</div>
-                        <p>03/11/2021 Alex: I'd love to buy it!</p>
-                        <p>03/11/2021 Mia: I love it!</p>
+                        <div class="comments_text">Comments (${commentsCounter})</div>
                         ${commentHtml || ''}
 
                     </div>
@@ -118,7 +130,7 @@ const createPopupWindow = async (filteredObj, i) => {
 
 const createPopupWindowReservation = async (filteredObj, i) => {
   const data = await showReservation(i, projectID);
-  commentHtml = reservationShow(data);
+  reservationShow(data);
   const html = `
     <div class="popup_container" id ="${filteredObj.idCategory}">
 
@@ -138,7 +150,7 @@ const createPopupWindowReservation = async (filteredObj, i) => {
 
                     <div class="comments_conatiner">
 
-                        <div class="comments_text">Reservation</div>
+                        <div class="comments_text">Reservation (${reservationCounter})</div>
                         ${commentHtml || ''}
 
                     </div>
@@ -196,6 +208,11 @@ const createCards = async () => {
     const items = await getData();
     const { categories } = items;
 
+    const itemsCounter = categories.length;
+    const itemCounterHtml = `<li class="nav_items"><a class="nav_items_links" href="#"> (${itemsCounter}) Categories</a></li><li class="nav_items"><a class="nav_items_links" href="#">Ingredients</a></li><li class="nav_items"><a class="nav_items_links" href="#">Meal Area</a></li>`;
+
+    navContainer.innerHTML = itemCounterHtml;
+
     const likeID = await getLikes(projectID);
 
     categories.forEach((category) => {
@@ -240,12 +257,18 @@ const createCards = async () => {
     heartBtn.forEach((heart) => {
       heart.addEventListener('click', (e) => {
         const { id } = e.target.closest('.item_contianer');
-        heart.classList.add('colour_red');
+        heart.classList.toggle('colour_red');
+
         let likeCounter = e.target.previousElementSibling.textContent;
         likeCounter = +likeCounter;
-        likeCounter += 1;
-        e.target.previousElementSibling.textContent = String(likeCounter);
-        postLikes(id, projectID);
+        if (heart.classList.contains('colour_red')) {
+          likeCounter += 1;
+          e.target.previousElementSibling.textContent = String(likeCounter);
+          postLikes(id, projectID);
+        } else {
+          likeCounter -= 1;
+          e.target.previousElementSibling.textContent = String(likeCounter);
+        }
       });
     });
     return 'Passed';
