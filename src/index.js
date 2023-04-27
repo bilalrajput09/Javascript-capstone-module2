@@ -93,6 +93,9 @@ const createPopupWindow = async (filteredObj, i) => {
   const closeBtn = document.querySelector('.fa-times');
   closeBtn.addEventListener('click', closePopup);
 
+  let commentsCounterState = commentsCounter;
+  const commentsTextContainer = document.querySelector('.comments_text');
+
   const forms = document.querySelectorAll('form');
   forms.forEach((form) => {
     form.addEventListener('submit', async (e) => {
@@ -108,6 +111,9 @@ const createPopupWindow = async (filteredObj, i) => {
       html += `<p>2023-0${dateTime.getMonth()}-${dateTime.getDate()} ${input.value}: ${textarea.value}</p>`;
 
       commentsContainer.insertAdjacentHTML('beforeend', html);
+
+      commentsCounterState += 1;
+      commentsTextContainer.innerHTML = `Comments (${commentsCounterState})`;
 
       const { id } = e.target.closest('.popup_container');
 
@@ -178,6 +184,9 @@ const createPopupWindowReservation = async (filteredObj, i) => {
   const closeBtn = document.querySelector('.fa-times');
   closeBtn.addEventListener('click', closePopup);
 
+  let reservationCounterState = reservationCounter;
+  const reservationTextContainer = document.querySelector('.comments_text');
+
   const forms = document.querySelectorAll('form');
   forms.forEach((form) => {
     form.addEventListener('submit', async (e) => {
@@ -194,6 +203,9 @@ const createPopupWindowReservation = async (filteredObj, i) => {
       html += `<p> ${inputStartDate.value} - ${inputEndDate.value} by ${inputName.value}</p>`;
 
       commentsContainer.insertAdjacentHTML('beforeend', html);
+
+      reservationCounterState += 1;
+      reservationTextContainer.innerHTML = `Reservation (${reservationCounterState})`;
 
       const { id } = e.target.closest('.popup_container');
 
