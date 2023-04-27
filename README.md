@@ -125,13 +125,17 @@ Testing with Lint-checks:
   npm test
 ```
 
-### Live Preview
+## 🚀 Screenshot <a name="screenshot"></a>
 
-[![Watch the video]]
+![image](./src/assests/Screenshot%202023-04-27%20124908.png)
 
-### Deployment
+## Live Video
 
-Deployed in `Github Pages`. [Live Preview]()
+[Watch the video](https://drive.google.com/file/d/1GWbP9k7l3xjJUzuNRQdWE2JAIN8bQ9Ry/view?usp=sharing)
+
+## 🚀 Live Demo <a name="live-demo"></a>
+
+- [Live Demo](https://bilalrajput09.github.io/Javascript-capstone-module2/)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -143,7 +147,7 @@ Deployed in `Github Pages`. [Live Preview]()
 
 - GitHub: [@bilalrajput09](https://github.com/bilalrajput09)
 - Twitter: [@bilal_rajput09](https://twitter.com/bilal_rajput09)
-- LinkedIn: [LinkedIn](https://www.linkedin.com/in/bilal-ahmed-18b12019a/)
+- LinkedIn: [@bilal-ahmed](https://www.linkedin.com/in/bilal-ahmed-18b12019a/)
 
 👤 **Abenezer Assefa**
 
