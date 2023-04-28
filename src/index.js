@@ -108,7 +108,9 @@ const createPopupWindow = async (filteredObj, i) => {
 
       let html = '';
 
-      html += `<p>2023-0${dateTime.getMonth()}-${dateTime.getDate()} ${input.value}: ${textarea.value}</p>`;
+      html += `<p>2023-0${dateTime.getMonth()}-${dateTime.getDate()} ${
+        input.value
+      }: ${textarea.value}</p>`;
 
       commentsContainer.insertAdjacentHTML('beforeend', html);
 
@@ -117,19 +119,22 @@ const createPopupWindow = async (filteredObj, i) => {
 
       const { id } = e.target.closest('.popup_container');
 
-      const response = await fetch(`https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/${projectID}/comments`, {
-        method: 'POST',
+      const response = await fetch(
+        `https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/${projectID}/comments`,
+        {
+          method: 'POST',
 
-        headers: {
-          'Content-Type': 'application/json',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+
+          body: JSON.stringify({
+            item_id: id,
+            username: input.value,
+            comment: textarea.value,
+          }),
         },
-
-        body: JSON.stringify({
-          item_id: id,
-          username: input.value,
-          comment: textarea.value,
-        }),
-      });
+      );
     });
   });
 };
@@ -209,7 +214,13 @@ const createPopupWindowReservation = async (filteredObj, i) => {
 
       const { id } = e.target.closest('.popup_container');
 
-      createReservation(projectID, id, inputName.value, inputStartDate.value, inputEndDate.value);
+      createReservation(
+        projectID,
+        id,
+        inputName.value,
+        inputStartDate.value,
+        inputEndDate.value,
+      );
     });
   });
 };
@@ -234,7 +245,11 @@ const createCards = async () => {
                     <p>${category.strCategory}</p> 
                     
                     <div class="likes_heart"> 
-                    <p>${likesShow(likeID, category) ? likesShow(likeID, category) : '0'}</p>
+                    <p>${
+  likesShow(likeID, category)
+    ? likesShow(likeID, category)
+    : '0'
+}</p>
                     <i class="fas fa-heart"></i>
                     </div>
                 </div>
@@ -253,7 +268,9 @@ const createCards = async () => {
       comment.addEventListener('click', (e) => {
         const { id } = e.target.closest('.item_contianer');
 
-        const [filteredObj] = categories.filter((category) => category.idCategory === id);
+        const [filteredObj] = categories.filter(
+          (category) => category.idCategory === id,
+        );
         createPopupWindow(filteredObj, i + 1);
       });
     });
@@ -261,7 +278,9 @@ const createCards = async () => {
     reservation.forEach((reserve, i) => {
       reserve.addEventListener('click', (e) => {
         const { id } = e.target.closest('.item_contianer');
-        const [filteredObj] = categories.filter((category) => category.idCategory === id);
+        const [filteredObj] = categories.filter(
+          (category) => category.idCategory === id,
+        );
         createPopupWindowReservation(filteredObj, i + 1);
       });
     });
